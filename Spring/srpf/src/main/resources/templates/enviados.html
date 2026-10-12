@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SRPF - Envios</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div th:replace="~{fragments/menu :: menu('enviados')}"></div>
+
+  <main class="container mb-5">
+    <h1 class="mt-3">Envios</h1>
+
+    <ul class="nav nav-tabs mb-3" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#mios" type="button" role="tab">Mis
+          envios</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#globales" type="button" role="tab">Envios
+          globales</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="mios" role="tabpanel">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Fecha</th>
+              <th>Problema</th>
+              <th>Respuesta</th>
+              <th>Resultado</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(intentos)}">
+              <td colspan="5" class="text-center text-muted py-4">Aun no has enviado respuestas.</td>
+            </tr>
+            <tr th:each="i : ${intentos}">
+              <td th:text="${#temporals.format(i.fecha, 'dd/MM/yyyy HH:mm')}">fecha</td>
+              <td>
+                <a th:href="@{/problemas/{id}(id=${i.problemaId})}" th:text="${i.problemaTitulo}"
+                  class="text-decoration-none">Problema</a>
+              </td>
+              <td th:text="${i.respuesta}">0</td>
+              <td>
+                <span class="badge" th:classappend="${i.resultado.name() == 'CORRECTO'} ? 'bg-success' : 'bg-danger'"
+                  th:text="${i.resultado.name()}">CORRECTO</span>
+              </td>
+              <td th:text="${i.tipo.name()}">GIMNASIO</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tab-pane fade" id="globales" role="tabpanel">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Fecha</th>
+              <th>Usuario</th>
+              <th>Problema</th>
+              <th>Resultado</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(globales)}">
+              <td colspan="5" class="text-center text-muted py-4">Aun no hay envios.</td>
+            </tr>
+            <tr th:each="g : ${globales}">
+              <td th:text="${#temporals.format(g.fecha, 'dd/MM/yyyy HH:mm')}">fecha</td>
+              <td th:text="${g.username}">usuario</td>
+              <td>
+                <a th:href="@{/problemas/{id}(id=${g.problemaId})}" th:text="${g.problemaTitulo}"
+                  class="text-decoration-none">Problema</a>
+              </td>
+              <td>
+                <span class="badge" th:classappend="${g.resultado.name() == 'CORRECTO'} ? 'bg-success' : 'bg-danger'"
+                  th:text="${g.resultado.name()}">CORRECTO</span>
+              </td>
+              <td th:text="${g.tipo.name()}">GIMNASIO</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

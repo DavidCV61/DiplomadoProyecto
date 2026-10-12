@@ -1,0 +1,6 @@
+target/
+*.bak
+*.zip
+.idea/
+.vscode/
+*.iml

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+  lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SRPF - Inicio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link th:href="@{/css/custom.css}" rel="stylesheet">
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+  <div th:replace="~{fragments/menu :: menu('inicio')}"></div>
+
+  <main class="container d-flex flex-column justify-content-center align-items-center flex-grow-1">
+    <div class="text-center p-5 bg-white rounded-3 shadow-sm border" style="max-width: 500px; width: 100%;">
+      <h1 class="display-6 fw-bold text-dark mb-3">Bienvenido a SRPF</h1>
+
+      <div sec:authorize="!isAuthenticated()">
+        <p class="text-muted mb-4">Inicia sesion para ingresar a la plataforma de fisica.</p>
+        <a th:href="@{/login}" class="btn btn-primary btn-lg w-100">Ingresar</a>
+      </div>
+
+      <div sec:authorize="isAuthenticated()">
+        <p class="text-success fw-bold mb-0">Hola</p>
+        <p class="text-muted small">todavia no se que poner aqui jaja</p>
+      </div>
+    </div>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+  <div th:replace="~{fragments/scripts :: bootstrap-js}"></div>
+</body>
+
+</html>

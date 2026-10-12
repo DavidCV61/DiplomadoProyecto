@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SRPF - Nueva publicacion</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div th:replace="~{fragments/menu :: menu('foro')}"></div>
+
+  <main class="container mb-5" style="max-width: 760px;">
+    <h1 class="mt-3">Nueva publicacion</h1>
+
+    <form th:action="@{/foro}" th:object="${publicacion}" method="post" novalidate>
+      <div class="mb-3">
+        <label for="titulo" class="form-label fw-bold">Titulo</label>
+        <input type="text" id="titulo" th:field="*{titulo}" class="form-control"
+          th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid'">
+        <div class="invalid-feedback" th:errors="*{titulo}"></div>
+      </div>
+      <div class="mb-3">
+        <label for="contenido" class="form-label fw-bold">Contenido</label>
+        <textarea id="contenido" th:field="*{contenido}" rows="7" class="form-control"
+          th:classappend="${#fields.hasErrors('contenido')} ? 'is-invalid'"></textarea>
+        <div class="invalid-feedback" th:errors="*{contenido}"></div>
+      </div>
+      <button type="submit" class="btn btn-primary">Publicar</button>
+      <a th:href="@{/foro}" class="btn btn-outline-secondary">Cancelar</a>
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
