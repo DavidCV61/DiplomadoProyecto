@@ -27,15 +27,15 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
     String pwd = authentication.getCredentials().toString();
     Usuario usuario = usuarioRepository.findByUsername(username)
         .orElseThrow(() -> {
-          log.warn("Security - login fallido, usuario inexistente: {}", username);
+          log.warn("Security; login fallido, usuario inexistente: {}", username);
           return new BadCredentialsException("Usuario o contraseña incorrectos");
         });
     if (passwordEncoder.matches(pwd, usuario.getPasswordHash())) {
       UserDetailsImpl principal = new UserDetailsImpl(usuario);
-      log.info("Security - login correcto: {}", username);
+      log.info("Security; login correcto: {}", username);
       return UsernamePasswordAuthenticationToken.authenticated(principal, null, principal.getAuthorities());
     } else {
-      log.warn("Security - login fallido, contraseña incorrecta: {}", username);
+      log.warn("Security;  login fallido, contraseña incorrecta: {}", username);
       throw new BadCredentialsException("Usuario o contraseña incorrectos");
     }
   }

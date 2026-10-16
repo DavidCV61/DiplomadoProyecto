@@ -49,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService {
   public void registrar(RegistroRequest request) throws UsuarioDuplicadoException {
     String username = request.getUsername().trim().toLowerCase(Locale.ROOT);
     String email = request.getEmail().trim().toLowerCase(Locale.ROOT);
-    log.info("UsuarioService - registrar {}", username);
+    log.info("UsuarioService:  registrar ", username);
 
     if (usuarioRepository.existsByUsername(username)) {
       throw new UsuarioDuplicadoException("username", username);
@@ -58,19 +58,12 @@ public class UsuarioServiceImpl implements UsuarioService {
       throw new UsuarioDuplicadoException("email", email);
     }
 
-    // El rol y el ELO los asigna el servidor, nunca el formulario
     Usuario usuario = new Usuario(
         request.getNombre().trim(),
         username,
         email,
         passwordEncoder.encode(request.getPassword()),
         Rol.USER);
-    try {
-      usuarioRepository.saveAndFlush(usuario);
-    } catch (DataIntegrityViolationException e) {
-      // Red de seguridad: dos registros simultaneos que pasaron el exists
-      log.warn("UsuarioService - registro duplicado por concurrencia: {}", username);
-      throw new UsuarioDuplicadoException("username", username);
-    }
+    usuarioRepository.save(usuario);
   }
 }

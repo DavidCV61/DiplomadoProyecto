@@ -5,25 +5,45 @@
 <head>
   <meta charset="UTF-8">
   <title>SRPF - Mi Perfil</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <link th:href="@{/css/custom.css}" rel="stylesheet">
+  <style>
+    .perfil-card { border: 1px solid #eef0f3; border-radius: 1rem; box-shadow: 0 6px 24px rgba(33, 37, 41, .06); }
+    .perfil-stat { background: #fafbfc; border: 1px solid #eef0f3; border-radius: .85rem; padding: 1rem; text-align: center; }
+    .perfil-stat .label { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: #6c757d; }
+    .perfil-stat .valor { font-size: 1.9rem; font-weight: 800; line-height: 1.2; }
+    .perfil-info { background: #fafbfc; border: 1px solid #eef0f3; border-radius: .85rem; }
+  </style>
 </head>
 
-<body class="bg-light">
+<body class="d-flex flex-column min-vh-100 bg-light">
   <div th:replace="~{fragments/menu :: menu('perfil')}"></div>
-  <main class="container my-4">
-    <div class="card shadow-sm border-0 p-4">
-      <h3 class="fw-bold mb-3">Tu perfil</h3>
-      <p>Nombre: <strong th:text="${perfil.nombre}">-</strong></p>
-      <p>Usuario: <strong class="text-primary" th:text="${perfil.username}">-</strong></p>
-      <p>Correo: <span th:text="${perfil.email}">-</span></p>
-      <p>Rol: <span class="badge bg-secondary" th:text="${perfil.rol}">-</span></p>
-      <p>Puntuacion ELO: <strong th:text="${perfil.puntuacionElo}">1000</strong></p>
-      <p>Miembro desde:
-        <span th:text="${#temporals.format(perfil.fechaRegistro, 'dd/MM/yyyy HH:mm')}">-</span>
-      </p>
-      <hr>
-      <p class="text-muted">Espacio para estadisticas individuales de resolucion y ranking.</p>
+  <main class="container my-4" style="max-width: 800px;">
+    <div class="card perfil-card">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div>
+            <h2 class="h4 fw-bold mb-0" th:text="${perfil.nombre}">Nombre</h2>
+            <div class="text-muted" th:text="'@' + ${perfil.username}">@usuario</div>
+          </div>
+          <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis border border-warning-subtle px-3 py-2"
+            th:text="${perfil.rol}">USER</span>
+        </div>
+
+        <hr class="my-4 text-secondary opacity-25">
+
+        <div class="perfil-stat">
+          <div class="label">Puntuación Elo</div>
+          <div class="valor" style="color:#d39e00" th:text="${perfil.puntuacionElo}">1000</div>
+        </div>
+
+        <div class="perfil-info mt-3 px-3 py-2 small text-muted d-flex flex-wrap justify-content-between gap-2">
+          <span>Correo: <strong class="text-dark" th:text="${perfil.email}">correo</strong></span>
+          <span>Miembro desde:
+            <strong class="text-dark" th:text="${#temporals.format(perfil.fechaRegistro, 'dd/MM/yyyy HH:mm')}">fecha</strong>
+          </span>
+        </div>
+      </div>
     </div>
   </main>
   <div th:replace="~{fragments/footer :: footer}"></div>
