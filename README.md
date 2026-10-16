@@ -95,4 +95,4 @@ Nota: el Documento de Especificación describe la primera versión del proyecto,
 
 ## Trabajo futuro
 
-Respuestas a respuestas en el foro, foto de perfil, Markdown en las preguntas, amigos y equipos, edición de publicaciones y mejoras en la interfaz. Revocación de tokens guardándolos en base de datos.
+Respuestas a respuestas en el foro, foto de perfil, Markdown en las preguntas, amigos y equipos, edición de publicaciones y mejoras en la interfaz
