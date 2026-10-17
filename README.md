@@ -1,4 +1,4 @@
-# SRPF – Sistema de Resolución de Problemas y Foro
+# SRPF – Sistema de Resolución de Problemas de Física
 
 Proyecto final del Diplomado de Java de la DGTIC-UNAM.
 
