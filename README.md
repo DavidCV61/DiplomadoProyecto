@@ -52,7 +52,7 @@ La aplicación queda en http://localhost:8088
 
 ## Generalidades
 
-SRPF es una plataforma para resolver problemas de programación y matemáticas, participar en competencias y ver un ranking. Cada usuario tiene una puntuación Elo, similar a la de Codeforces, que sube o baja según su desempeño.
+SRPF es una plataforma para resolver problemas de fisica, participar en competencias y ver un ranking. Cada usuario tiene una puntuación Elo, similar a la de Codeforces, que sube o baja según su desempeño.
 
 Módulos principales:
 
